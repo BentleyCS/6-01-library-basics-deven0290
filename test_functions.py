@@ -1,5 +1,5 @@
 import builtins
-import CSP_6_01_Library_Basics.py 
+import CSP_6_01_Library_Basics
 
 
 def test_process_expenses():
