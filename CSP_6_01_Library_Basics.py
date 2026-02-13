@@ -7,9 +7,7 @@ def analyze_scores(n):
     scores = []
     for _ in range(n):
         scores.append(float(input("")))
-    high = analytics.find_max(scores)
-    avg = analytics.average(scores)
-    return high, avg
+    return analytics.find_max(scores), analytics.average(scores)
 
 def sanitize_usernames(usernames):
     return [analytics.to_lower(analytics.remove_spaces(s)) for s in usernames]
