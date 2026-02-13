@@ -1,34 +1,24 @@
 from decimal import Decimal, ROUND_HALF_UP
 
-def _to_decimal(x):
-    return Decimal(str(x))
-
-def nice_number(x):
-    """Convert Decimals/floats to int if whole, else float."""
-    if isinstance(x, Decimal):
-        if x == x.to_integral_value():
-            return int(x)
-        return float(x)
-    # float/int
-    if isinstance(x, (int,)):
-        return x
-    if isinstance(x, float) and abs(x - round(x)) < 1e-9:
-        return int(round(x))
-    return x
-
 def add_percent(value, percent):
-    v = _to_decimal(value)
-    p = _to_decimal(percent)
+    
+    v = Decimal(str(value))
+    p = Decimal(str(percent))
     out = (v * (Decimal("100") + p) / Decimal("100")).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
-    return nice_number(out)
+
+
+    if out == out.to_integral_value():
+        return int(out)
+    return float(out)
 
 def average(nums):
     if not nums:
         return 0
-    total = sum(nums)
-    avg = total / len(nums)
-    
-    return nice_number(float(avg))
+    out = sum(nums) / len(nums)
+   
+    if abs(out - round(out)) < 1e-9:
+        return int(round(out))
+    return out
 
 def find_max(nums):
     return max(nums) if nums else None
